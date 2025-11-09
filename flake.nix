@@ -6,9 +6,14 @@
   };
 
   outputs =
-    { flakelight, ... }:
+    { flakelight, treefmt-nix, ... }:
     flakelight ./. {
       imports = [ flakelight.flakelightModules.extendFlakelight ];
-      flakelightModule = ./flakelight-treefmt.nix;
+      flakelightModule =
+        { lib, ... }:
+        {
+          imports = [ ./flakelight-treefmt.nix ];
+          inputs.treefmt-nix = lib.mkDefault treefmt-nix;
+        };
     };
 }
