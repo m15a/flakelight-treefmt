@@ -6,8 +6,14 @@
   };
 
   outputs =
-    { flakelight, treefmt-nix, ... }:
+    {
+      self,
+      flakelight,
+      treefmt-nix,
+      ...
+    }@inputs:
     flakelight ./. {
+      inherit inputs;
       imports = [
         flakelight.flakelightModules.extendFlakelight
         ./flakelight-treefmt.nix
@@ -16,6 +22,7 @@
         { lib, ... }:
         {
           imports = [ ./flakelight-treefmt.nix ];
+          inputs.self = lib.mkDefault self;
           inputs.treefmt-nix = lib.mkDefault treefmt-nix;
         };
       treefmtConfig = {
