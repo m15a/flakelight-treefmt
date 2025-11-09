@@ -21,10 +21,8 @@ let
     ;
   inherit (inputs.treefmt-nix.lib) evalModule;
 
-  treefmtEval = pkgs: evalModule pkgs config.treefmtConfig;
-  treefmtCheck = pkgs: (treefmtEval pkgs).config.build.check;
-  treefmtWrapper = pkgs: (treefmtEval pkgs).config.build.wrapper;
-  treefmtPrograms = pkgs: attrValues (treefmtEval pkgs).config.build.programs;
+  build = pkgs: (evalModule pkgs config.treefmtConfig).config.build;
+  wrapper = pkgs: (build pkgs).wrapper;
 in
 
 {
@@ -53,14 +51,14 @@ in
 
   config = mkMerge [
     (mkIf config.treefmtWrapperInDevShell {
-      devShell.packages = pkgs: [ (treefmtWrapper pkgs) ];
+      devShell.packages = pkgs: [ (wrapper pkgs) ];
     })
     (mkIf config.treefmtProgramsInDevShell {
-      devShell.packages = treefmtPrograms;
+      devShell.packages = pkgs: attrValues (build pkgs).programs;
     })
     {
-      formatter = mkForce treefmtWrapper;
-      checks.formatting = mkForce (pkgs: (treefmtCheck pkgs) inputs.self);
+      formatter = mkForce wrapper;
+      checks.formatting = mkForce (pkgs: (build pkgs).check inputs.self);
     }
   ];
 }
