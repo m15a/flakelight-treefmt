@@ -11,8 +11,6 @@ let
     mkIf
     mkMerge
     mkOption
-    optional
-    optionals
     ;
   inherit (lib.types)
     attrs
@@ -52,11 +50,11 @@ in
   };
 
   config = mkMerge [
-    (mkIf (config.treefmtWrapperInDevShell || config.treefmtProgramsInDevShell) {
-      devShell.packages =
-        pkgs:
-        optional config.treefmtWrapperInDevShell (treefmtWrapper pkgs)
-        ++ optionals config.treefmtProgramsInDevShell (treefmtPrograms pkgs);
+    (mkIf config.treefmtWrapperInDevShell {
+      devShell.packages = pkgs: [ (treefmtWrapper pkgs) ];
+    })
+    (mkIf config.treefmtProgramsInDevShell {
+      devShell.packages = treefmtPrograms;
     })
     {
       formatter = treefmtWrapper;
