@@ -43,7 +43,7 @@ The default value is `true`.
 ### `treefmtProgramsInDevShell`
 
 Controls whether all formatters/linters configured via `treefmtConfig`
-(e.g., `nixfmt` in the above example) are added to `devShell.packages`.
+(e.g., `nixfmt`) are added to `devShell.packages`.
 The default value is `true`.
 
 [flakelight]: https://github.com/nix-community/flakelight
