@@ -7,7 +7,6 @@
 
   outputs =
     {
-      self,
       flakelight,
       treefmt-nix,
       ...
