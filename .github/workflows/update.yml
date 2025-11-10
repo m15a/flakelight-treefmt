@@ -15,6 +15,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - run: |
+          prev_head="$(git rev-parse HEAD)"
           nix flake update --commit-lock-file
+          if [ "$(git rev-parse HEAD)" != "$prev_head" ]; then
+            nix flake check --all-systems
+            git commit --amend -m "chore: update flake inputs"
+          fi
       - run: |
           git push
