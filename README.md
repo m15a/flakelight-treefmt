@@ -2,12 +2,10 @@
 
 # flakelight-treefmt
 
-Integrate treefmt-nix into [flakelight].
+This module extends your [flakelight] project to replace the standard
+flakelight formatter with one powered by [treefmt-nix].
 
 ## Usage
-
-This module extends your flakelight project to replace the standard
-flakelight formatter with one powered by [treefmt-nix].
 
 A minimal example looks like this:
 
