@@ -31,10 +31,9 @@ A minimal example looks like this:
 
 ### `treefmtConfig`
 
-The configuration for treefmt-nix.
-It can be either an attribute set containing `programs.*` etc.
-definitions (like the example above) or a path to a configuration file
-(e.g., `./treefmt.nix`).
+Your configuration for treefmt-nix. It can be either an inline module
+containing `programs.*` etc. (like the example above) or a path to a
+configuration file (e.g., `./treefmt.nix`).
 
 ### `treefmtWrapperInDevShell`
 

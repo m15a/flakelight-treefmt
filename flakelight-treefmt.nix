@@ -14,10 +14,8 @@ let
     mkOption
     ;
   inherit (lib.types)
-    attrs
     bool
-    oneOf
-    path
+    deferredModule
     ;
   inherit (inputs.treefmt-nix.lib) evalModule;
 
@@ -28,11 +26,8 @@ in
 {
   options = {
     treefmtConfig = mkOption {
-      description = "Treefmt configuration as an attribute set or file path.";
-      type = oneOf [
-        attrs
-        path
-      ];
+      description = "Treefmt configuration module.";
+      type = deferredModule;
       default = { };
     };
 
