@@ -22,7 +22,6 @@
         { lib, ... }:
         {
           imports = [ ./flakelight-treefmt.nix ];
-          inputs.self = lib.mkDefault self;
           inputs.treefmt-nix = lib.mkDefault treefmt-nix;
         };
       treefmtConfig = {
