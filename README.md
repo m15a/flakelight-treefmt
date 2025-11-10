@@ -46,5 +46,9 @@ Controls whether all formatters/linters configured via `treefmtConfig`
 (e.g., `nixfmt`) are added to `devShell.packages`.
 The default value is `true`.
 
+## License
+
+[The BSD 3-clause license](LICENSE).
+
 [flakelight]: https://github.com/nix-community/flakelight
 [treefmt-nix]: https://github.com/numtide/treefmt-nix
