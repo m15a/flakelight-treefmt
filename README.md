@@ -27,6 +27,28 @@ A minimal example looks like this:
 > You must inherit `inputs.self` so that treefmt-nix can locate and
 > check the files within your project.
 
+You can also use this module with other flakelight modules.
+An example with [flakelight-rust] would be:
+
+```nix
+{
+  inputs = {
+    flakelight-rust.url = "github:accelbread/flakelight-rust";
+    flakelight-treefmt.url = "github:m15a/flakelight-treefmt";
+    flakelight-treefmt.inputs.flakelight.follows = "flakelight-rust/flakelight";
+  };
+  outputs =
+    { self, flakelight-rust, flakelight-treefmt, ... }:
+    flakelight-rust ./. {
+      inputs.self = self;
+      imports = [ flakelight-treefmt.flakelightModules.default ];
+      treefmtConfig = { pkgs, ... }: {
+        programs.rustfmt.enable = true;
+      };
+    };
+}
+```
+
 ## Options
 
 ### `treefmtConfig`
@@ -51,4 +73,5 @@ The default value is `true`.
 [The BSD 3-clause license](LICENSE).
 
 [flakelight]: https://github.com/nix-community/flakelight
+[flakelight-rust]: https://github.com/accelbread/flakelight-rust
 [treefmt-nix]: https://github.com/numtide/treefmt-nix
