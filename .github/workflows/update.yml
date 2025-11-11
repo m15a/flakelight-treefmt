@@ -19,7 +19,7 @@ jobs:
           nix flake update --commit-lock-file
           if [ "$(git rev-parse HEAD)" != "$prev_head" ]; then
             nix flake check --all-systems
-            git commit --amend -m "chore: update flake inputs"
+            git commit --amend -m "chore: update flake inputs" -m "$(git log -1 --format=%b)"
           fi
       - run: |
           git push
