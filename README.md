@@ -2,8 +2,8 @@
 
 # flakelight-treefmt
 
-This module extends your [flakelight] project to replace the standard
-flakelight formatter with one powered by [treefmt-nix].
+This module extends your [flakelight] project to replace the builtin
+formatter with one powered by [treefmt-nix].
 
 ## Usage
 
