@@ -26,12 +26,6 @@
       treefmtConfig = {
         programs = {
           nixfmt.enable = true;
-          mdformat.enable = true;
-          mdformat.plugins =
-            ps: with ps; [
-              mdformat-gfm
-              mdformat-gfm-alerts
-            ];
         };
       };
     };
