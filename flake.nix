@@ -23,20 +23,9 @@
           imports = [ ./flakelight-treefmt.nix ];
           inputs.treefmt-nix = lib.mkDefault treefmt-nix;
         };
-      treefmtConfig =
-        { lib, pkgs, ... }:
-        {
-          programs = {
-            nixfmt.enable = true;
-          };
-          settings.formatter.rumdl = {
-            command = lib.getExe pkgs.rumdl;
-            options = [
-              "fmt"
-              "--"
-            ];
-            includes = [ "*.md" ];
-          };
-        };
+      treefmtConfig.programs = {
+        nixfmt.enable = true;
+        rumdl-format.enable = true;
+      };
     };
 }
